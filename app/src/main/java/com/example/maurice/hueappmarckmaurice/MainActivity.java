@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements HueListner{
 
     Button emulatorButton;
     Button bridgeButton;
@@ -35,12 +35,8 @@ public class MainActivity extends AppCompatActivity {
                         getApplicationContext(),
                         DetailActivity.class
                 );
-
                 intent.putExtra("isEmulator", true);
-
                 intent.putExtra("portNumber", portNmr);
-
-
                 startActivity(intent);
             }
         });
@@ -56,16 +52,17 @@ public class MainActivity extends AppCompatActivity {
                         getApplicationContext(),
                         DetailActivity.class
                 );
-
-
                 intent.putExtra("isEmulator", false);
-
                 intent.putExtra("ipNumber", ipNmr);
-
-
                 startActivity(intent);
             }
         });
+
+
+        HueApiCall api = new HueApiCall(
+                this.getApplicationContext(),
+                this);
+        api.getApiArray();
 
 
 
