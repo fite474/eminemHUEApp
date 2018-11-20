@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     EditText portInputText;
     EditText ipInputText;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
                         DetailActivity.class
                 );
 
+                intent.putExtra("isEmulator", true);
+
+                intent.putExtra("portNumber", portNmr);
 
 
                 startActivity(intent);
@@ -42,6 +46,26 @@ public class MainActivity extends AppCompatActivity {
         });
 
         bridgeButton = (Button) findViewById(R.id.bridgeButton);
+        ipInputText = (EditText) findViewById(R.id.ipTextInput);
+
+        bridgeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ipNmr = ipInputText.getText().toString();
+                Intent intent = new Intent(
+                        getApplicationContext(),
+                        DetailActivity.class
+                );
+
+
+                intent.putExtra("isEmulator", false);
+
+                intent.putExtra("ipNumber", ipNmr);
+
+
+                startActivity(intent);
+            }
+        });
 
 
 
