@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.Call;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class DetailActivity extends AppCompatActivity implements HueListner{
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    String[] lamps;
+    ArrayList<Lamp> lamps;
     private HueApiCall api;
 
     @Override
@@ -36,7 +38,7 @@ public class DetailActivity extends AppCompatActivity implements HueListner{
 
             String portNumber = intent.getExtras().getString("portNumber");
             //String portNumber = Objects.requireNonNull(intent.getExtras()).getString("portNumber");
-            String appSetting = "Heu emulator";
+            String appSetting = "";//"Heu_emulator";
 
             activityVersionTxt.setText(appSetting);
 
@@ -45,7 +47,7 @@ public class DetailActivity extends AppCompatActivity implements HueListner{
         {
             String ipNumber = intent.getExtras().getString("ipNumber");
             //String portNumber = Objects.requireNonNull(intent.getExtras()).getString("portNumber");
-            String appSetting = "Brige";
+            String appSetting = "";//"Brige";
 
             activityVersionTxt.setText(appSetting);
         }
@@ -54,7 +56,7 @@ public class DetailActivity extends AppCompatActivity implements HueListner{
         //lamps = new ArrayList<>();
 
 
-        mAdapter = new MyAdapter(lamps);
+        //mAdapter = new MyAdapter(lamps);
 
 
         HueApiCall api = new HueApiCall(
@@ -76,18 +78,33 @@ public class DetailActivity extends AppCompatActivity implements HueListner{
 
         // specify an adapter (see also next example)
 
-        mAdapter = new MyAdapter(lamps);
+        mAdapter = new MyAdapter(getApplicationContext(), lamps, this);
         mRecyclerView.setAdapter(mAdapter);
 
-
+       // mRecyclerView.setOnContextClickListener();
+//        mRecyclerView.setOnClickListener(new AdapterView.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(
+//                        getApplicationContext(),
+//                        LampSettingsActivity.class
+//                );
+//
+//
+//                startActivity(intent);
+//            }
+//
+//        });
 
     }
+
+
+
 
     @Override
     public void onLampAvailable(Lamp lamp) {
         Log.i("", "");
-        int index = lamps.length + 1;
-        lamps[index] = lamp.toString();
+        lamps.add(lamp);
         mAdapter.notifyDataSetChanged();
     }
 
