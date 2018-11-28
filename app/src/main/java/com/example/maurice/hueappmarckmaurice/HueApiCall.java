@@ -19,25 +19,45 @@ public class HueApiCall{
     Context context;
     RequestQueue queue;
     HueListner listener;
+    private String basicUrl;
+    private String username;
 
-    public HueApiCall(Context context, HueListner listener) {
+    public HueApiCall(Context context, HueListner listener, String ipAdress) {
 
         this.context = context;
         queue = Volley.newRequestQueue(context);
         this.listener = listener;
+        this.basicUrl = "https://"+ipAdress+"/api";
     }
 
-    public void getApiArray(){
+    public void addUsernameToString()
+    {
+        
+    }
+    private String getUserName()
+    {
 
-        String url = "https://api.blindwalls.gallery/apiv2/murals";
-        JsonArrayRequest request = new JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                null,
+    }
 
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray blindWalls) {
+
+
+
+
+
+
+
+
+//    public void getApiArray(){
+//
+//        String url = "https://api.blindwalls.gallery/apiv2/murals";
+//        JsonArrayRequest request = new JsonArrayRequest(
+//                Request.Method.GET,
+//                url,
+//                null,
+//
+//                new Response.Listener<JSONArray>() {
+//                    @Override
+//                    public void onResponse(JSONArray blindWalls) {
 //                        Log.i("NRA",blindWalls.toString());
 //
 //                        try {
@@ -57,24 +77,24 @@ public class HueApiCall{
 //                        } catch (JSONException e1) {
 //                            e1.printStackTrace();
 //                        }
-
-
-                    }
-                },
-
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("NRA","NOT OK");
-                        //listener.onBlindWallError(error.toString());
-
-                    }
-
-                }
-
-        );
-
-        this.queue.add(request);
-    }
+//
+//
+//                    }
+//                },
+//
+//                new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Log.i("NRA","NOT OK");
+//                        //listener.onBlindWallError(error.toString());
+//
+//                    }
+//
+//                }
+//
+//        );
+//
+//        this.queue.add(request);
+//    }
 }
