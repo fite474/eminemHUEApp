@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements HueListner{
+public class MainActivity extends AppCompatActivity{
 
     Button emulatorButton;
     Button bridgeButton;
@@ -19,9 +19,7 @@ public class MainActivity extends AppCompatActivity implements HueListner{
     EditText portInputText;
     EditText ipInputText;
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+
 
 
     @Override
@@ -64,27 +62,7 @@ public class MainActivity extends AppCompatActivity implements HueListner{
         });
 
 
-        HueApiCall api = new HueApiCall(
-                this.getApplicationContext(),
-                this);
-        api.getApiArray();
 
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewList);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        //mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        //mLayoutManager = new LinearLayoutManager(this);
-        //mRecyclerView.setLayoutManager(mLayoutManager);
-
-        // specify an adapter (see also next example)
-        String[] test= new String[1];
-        test[0] = "";
-        mAdapter = new MyAdapter(test);
-        mRecyclerView.setAdapter(mAdapter);
 
     }
 }
