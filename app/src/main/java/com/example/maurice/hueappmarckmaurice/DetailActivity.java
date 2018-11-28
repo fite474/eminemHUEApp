@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.telecom.Call;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ public class DetailActivity extends AppCompatActivity implements HueListner{
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     String[] lamps;
+    private HueApiCall api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +59,9 @@ public class DetailActivity extends AppCompatActivity implements HueListner{
 
         HueApiCall api = new HueApiCall(
                 this.getApplicationContext(),
-                this);
-        api.getApiArray();
+                this,
+                "localhost:8000");
+        api.HandleAPICall(CallType.GET_USERNAME, null, null);
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewList);
@@ -90,6 +93,18 @@ public class DetailActivity extends AppCompatActivity implements HueListner{
 
     @Override
     public void onLampWallError(String errorString) {
+
+    }
+
+    @Override
+    public void onUserNameAvailable(String userName)
+    {
+        api.setUsername(userName);
+    }
+
+    @Override
+    public void onAllLampsAvailable(ArrayList<Lamp> lamps)
+    {
 
     }
 }
